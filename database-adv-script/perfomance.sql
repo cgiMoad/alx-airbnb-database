@@ -1,4 +1,5 @@
 -- Initial complex query: Get all bookings with user, property, and payment details
+-- Initial query: Get all bookings with user, property, and payment details, with filtering
 SELECT
     b.booking_id,
     b.start_date,
@@ -15,7 +16,10 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.user_id
 JOIN properties p ON b.property_id = p.property_id
-LEFT JOIN payments pay ON b.booking_id = pay.booking_id;
+LEFT JOIN payments pay ON b.booking_id = pay.booking_id
+WHERE b.status = 'confirmed'
+  AND p.location = 'New York'
+ORDER BY b.booking_id;
 
 -- Refactored query for improved performance
 SELECT
